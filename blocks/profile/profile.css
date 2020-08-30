@@ -1,0 +1,14 @@
+.profile {
+    max-width: 882px;
+    margin: 40px auto 51px;
+    display: flex;
+    color: #fff;
+}
+
+@media only screen and (max-width: 582px) {
+    .profile {
+        margin-bottom: 36px;
+        max-width: 282px;
+        flex-direction: column;
+    }
+}
