@@ -4,6 +4,7 @@
 * Описание проекта
 * Технологии
 * GitHub
+* GitHubPages
 
 **Описание проекта**
 
@@ -15,3 +16,6 @@
 
 **GitHub**
 https://github.com/Artem-Belokonny/mesto
+
+**GitHubPages**
+https://artem-belokonny.github.io/mesto/
