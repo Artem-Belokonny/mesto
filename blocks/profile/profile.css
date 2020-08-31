@@ -5,7 +5,7 @@
     color: #fff;
 }
 
-@media only screen and (max-width: 582px) {
+@media only screen and (max-width: 660px) {
     .profile {
         margin-bottom: 36px;
         max-width: 282px;

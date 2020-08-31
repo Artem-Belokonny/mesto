@@ -8,6 +8,9 @@
     align-self: center;
     opacity: 1;
     transition: opacity 2s;
+    background-image: url(../../../images/add-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .profile__add-button:hover {
@@ -15,7 +18,7 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 582px) {
+@media only screen and (max-width: 660px) {
     .profile__add-button {
     min-width: 282px;
     margin-top: 36px;

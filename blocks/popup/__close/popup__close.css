@@ -1,9 +1,16 @@
 .popup__close {
+    min-width: 50px;
+    min-height: 50px;
     position: absolute;
-    top: -45px;
-    right: -45px;
+    top: -50px;
+    right: -50px;
     opacity: 1;
     transition: opacity 2s;
+    background-color: black;
+    background-image: url(../../../images/Close-Icon.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
 }
 
 .popup__close:hover {
@@ -11,7 +18,7 @@
     cursor: pointer;
 }
 
-@media only screen and (max-width: 582px) {
+@media only screen and (max-width: 660px) {
     .popup__close {
         left: 0;
     }

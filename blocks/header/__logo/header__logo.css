@@ -1,0 +1,5 @@
+@media only screen and (max-width: 660px) {
+    .header__logo {
+    max-width: 104px;
+    }
+}
