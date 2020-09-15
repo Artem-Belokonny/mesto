@@ -1,4 +1,4 @@
-.popup__title {
+.add-popup__title {
     max-width: 330px;
     font-style: normal;
     font-weight: 900;
@@ -6,4 +6,11 @@
     line-height: 29px;
     padding: 0;
     margin: 34px 64px 54px 36px;
+}
+
+@media only screen and (max-width: 515px) {
+    .add-popup__title {
+        font-size: 18px;
+        line-height: 22px;
+    }
 }

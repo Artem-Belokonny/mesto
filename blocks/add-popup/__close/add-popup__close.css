@@ -1,25 +1,20 @@
-.popup__close {
-    min-width: 50px;
-    min-height: 50px;
+.add-popup__close {
+    min-width: 45px;
+    min-height: 45px;
     position: absolute;
-    top: -50px;
-    right: -50px;
+    top: -45px;
+    right: -45px;
     opacity: 1;
     transition: opacity 2s;
-    background-color: black;
+    background-color: transparent;
     background-image: url(../../../images/Close-Icon.svg);
     background-repeat: no-repeat;
     background-position: center;
     border: none;
+    padding: 0;
 }
 
-.popup__close:hover {
+.add-popup__close:hover {
     opacity: .6;
     cursor: pointer;
-}
-
-@media only screen and (max-width: 660px) {
-    .popup__close {
-        left: 0;
-    }
 }
