@@ -6,6 +6,7 @@
     background-size: contain;
     opacity: 1;
     transition: opacity 2s;
+    outline: none;
 }
 
 .elements__like:hover {
