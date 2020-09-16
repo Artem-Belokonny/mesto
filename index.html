@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Проектная работа № 4 Яндекс.Практикум">
-  <meta name="keywords" content="HTML5, CSS, Яндекс.Практикум">
+  <meta name="description" content="Проектная работа № 5 Яндекс.Практикум">
+  <meta name="keywords" content="HTML5, CSS, JS, Яндекс.Практикум">
   <meta name="author" content="Артем Белоконный/Яндекс.Практикум">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
@@ -17,47 +17,52 @@
     </header>
 		<main class="content">
 		<section class="profile">
-      <img src="./images/avatar.jpg" alt="Аватарка" class="profile__avatar">
+      <img src="./images/avatarka.jpg" alt="Аватарка" class="profile__avatar">
         <div class="profile__personal-info">
           <div class="profile__personal-adaptiv">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name">Артем Белоконный</h1>
             <button type="button" class="profile__edit-button"><img src="./images/edit-button.svg" alt="Добавить" class="profile__edit-button-image"></button>
           </div>
-            <p class="profile__job">Исследователь океана</p>
+            <p class="profile__job">Студент Yandex.Praktikum</p>
         </div>
       <button type="button" class="profile__add-button"></button>
     </section>
+
     <section class="elements">
 
     </section>
+
     </main>
-    <section class="edit-popup">
-      <div class="edit-popup__container">
-        <form action="#" name="profile-form" class="edit-popup__container">
-          <button type="button" aria-label="close" class="edit-popup__close"></button>
-          <h2 class="edit-popup__title">Редактировать профиль</h2>
-          <input type="text" name="name" class="edit-popup__input edit-popup__input_name">
-          <input type="text" name="job" class="edit-popup__input edit-popup__input_job">
-          <button type="submit" class="edit-popup__save">Сохранить</button>
+
+    <section class="popup popup_edit">
+      <div class="popup__container">
+        <form action="#" name="profile-form" class="popup__container popup__container_edit">
+          <button type="button" aria-label="close" class="popup__close popup__close_edit"></button>
+          <h2 class="popup__title popup__title_edit">Редактировать профиль</h2>
+          <input type="text" name="name" class="popup__input popup__input_edit_name">
+          <input type="text" name="job" class="popup__input popup__input_edit_job">
+          <button type="submit" class="popup__save popup__save_edit">Сохранить</button>
         </form>
       </div>
     </section>
-    <section class="add-popup">
-      <div class="add-popup__container">
-        <form action="#" name="profile-form" class="add-popup__container">
-          <button type="button" aria-label="close" class="add-popup__close"></button>
-          <h2 class="add-popup__title">Новое место</h2>
-          <input type="text" name="place" placeholder="Название" class="add-popup__input add-popup__input_place">
-          <input type="text" name="link" placeholder="Ссылка на картинку" class="add-popup__input add-popup__input_link">
-          <button type="submit" class="add-popup__save">Сохранить</button>
+
+    <section class="popup popup_add">
+      <div class="popup__container">
+        <form action="#" name="add-form" class="popup__container popup__container_add">
+          <button type="button" aria-label="close" class="popup__close popup__close_add"></button>
+          <h2 class="popup__title popup__title_add">Новое место</h2>
+          <input type="text" name="place" placeholder="Название" class="popup__input popup__input_add-title">
+          <input type="text" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_add-link">
+          <button type="submit" class="popup__save popup__save_add">Сохранить</button>
         </form>
       </div>
     </section>
-    <section class="image-popup">
-      <div class="image-popup__container">
-        <button type="button" aria-label="close" class="image-popup__close"></button>
-        <img src="" alt="" class="image-popup__photo">
-        <p class="image-popup__title"></p>
+    
+    <section class="popup popup_zoom">
+      <div class="popup__container popup__container_zoom">
+        <button type="button" aria-label="close" class="popup__close popup__close_zoom"></button>
+        <img src="" alt="" class="popup__image">
+        <p class="popup__title_zoom"></p>
       </div>
     </section>
     <footer class="footer">
@@ -67,9 +72,9 @@
 
   <template class="elements-template">
     <article class="elements__card">
-      <img src="" alt="" class="elements__photo">
+      <img src="" alt="" class="elements__image">
       <div class="elements__group">
-        <p class="elements__place"></p>
+        <p class="elements__title"></p>
         <button type="button" class="elements__like"></button>
         <button type="button" aria-label="delete" class="elements__delete-button">
           <img src="./images/bin1.svg" alt="Удалить" class="elements__delete-top">
