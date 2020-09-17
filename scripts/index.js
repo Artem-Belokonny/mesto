@@ -66,7 +66,7 @@ function closePopup(popup, evt) {
 
 function formSubmitHandler (evt) {
     saveFormData();
-    closeEditPopup(evt);
+    closePopup(popupEdit, evt);
 }
 
 function render() {
