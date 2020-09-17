@@ -25,7 +25,7 @@ const initialCards = [
     },
 ];
 
-const popup = document.querySelector('.popup');
+// const popup = document.querySelector('.popup'); удалить перед отправкой
 const popupEdit = document.querySelector('.popup_edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEditCloseButton = document.querySelector('.popup__close_edit');
@@ -45,7 +45,7 @@ const formAddElement = document.querySelector('.popup__container_add');
 const popupZoom = document.querySelector('.popup_zoom');
 const popupZoomCloseButton = document.querySelector('.popup__close_zoom');
 
-function profileDate() {
+function takeProfileDateValue() {
     popupName.value = profileName.textContent;
     popupJob.value = profileJob.textContent;
 }
@@ -64,31 +64,6 @@ function closePopup(popup, evt) {
     popup.classList.toggle('popup_opened');
 }
 
-function openEditPopup() {
-    profileDate();
-    openPopup(popupEdit);
-}
-
-function closeEditPopup(evt) {
-    closePopup(popupEdit, evt);
-}
-
-function openAddPopup() {
-    openPopup(popupAdd);
-}
-
-function closeAddPopup(evt) {
-    closePopup(popupAdd, evt);
-}
-
-function openZoomPopup() {
-    openPopup(popupZoom);
-}
-
-function closeZoomPopup(evt) {
-    closePopup(popupZoom, evt);
-}
-
 function formSubmitHandler (evt) {
     saveFormData();
     closeEditPopup(evt);
@@ -105,15 +80,16 @@ function addCardToSection({name, link}){
 
 function createCard({name, link}) {
     const card = template.cloneNode(true);
-    card.querySelector('.elements__title').innerText = name;
-    card.querySelector('.elements__image').alt = name;
-    card.querySelector('.elements__image').src = link;
+    const elementsImage = card.querySelector('.elements__image');
+    const elementsTitle = card.querySelector('.elements__title');
+    elementsTitle.innerText = name;
+    elementsImage.alt = name;
+    elementsImage.src = link;
     // Увеличение фото
-    const image = card.querySelector('.elements__image');
     const popupZoomTitle = document.querySelector('.popup__title_zoom');
     const popupZoomImage = document.querySelector('.popup__image');
-    image.addEventListener('click', () => {
-        popupZoom.classList.add('popup_opened');
+    elementsImage.addEventListener('click', () => {
+        openPopup(popupZoom);
         popupZoomTitle.textContent = name;
         popupZoomImage.alt = name;
         popupZoomImage.src = link;
@@ -143,15 +119,18 @@ function submitAddCardForm(evt) {
     cards.prepend(card);
     addFormPlaceInput.value = "";
     addFormLinkInput.value = "";
-    closeAddPopup(evt);
+    closePopup(popupAdd, evt);
 }
 
 render();
 
 formAddElement.addEventListener('submit', submitAddCardForm);
-popupEditOpenButton.addEventListener('click', openEditPopup);
-popupEditCloseButton.addEventListener('click', closeEditPopup);
 formEditElement.addEventListener('submit', formSubmitHandler);
-popupAddOpenButton.addEventListener('click', openAddPopup);
-popupAddCloseButton.addEventListener('click', closeAddPopup);
-popupZoomCloseButton.addEventListener('click', closeZoomPopup);
+popupEditOpenButton.addEventListener('click', () => {
+    takeProfileDateValue();
+    openPopup(popupEdit);
+});
+popupEditCloseButton.addEventListener('click', (evt) => closePopup(popupEdit, evt));
+popupAddOpenButton.addEventListener('click', () => openPopup(popupAdd));
+popupAddCloseButton.addEventListener('click', (evt) => closePopup(popupAdd, evt));
+popupZoomCloseButton.addEventListener('click', (evt) => closePopup(popupZoom, evt));
