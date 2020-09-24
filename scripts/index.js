@@ -25,7 +25,8 @@ const initialCards = [
     },
 ];
 
-// const popup = document.querySelector('.popup'); удалить перед отправкой
+// const popup = document.querySelector('.popup');
+const popupOpened = document.querySelector('.popup_opened');
 const popupEdit = document.querySelector('.popup_edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEditCloseButton = document.querySelector('.popup__close_edit');
@@ -44,6 +45,18 @@ const addFormLinkInput = document.querySelector('.popup__input_add-link');
 const formAddElement = document.querySelector('.popup__container_add');
 const popupZoom = document.querySelector('.popup_zoom');
 const popupZoomCloseButton = document.querySelector('.popup__close_zoom');
+const page = document.querySelector('.page');
+
+// пробую закрытие по CLICK - почему закрывает только 1ое EDIT?
+
+function closePopupByClick(evt) {
+    if (evt.target.classList.contains('popup_opened')) {
+        evt.target.classList.remove('popup_opened');
+    }
+}
+
+page.addEventListener('click', closePopupByClick);
+// 
 
 function takeProfileDateValue() {
     popupName.value = profileName.textContent;

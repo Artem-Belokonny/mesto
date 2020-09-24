@@ -33,14 +33,14 @@
     </section>
 
     </main>
-
+    
     <section class="popup popup_edit">
       <div class="popup__container">
-        <form action="#" name="profile-form" class="popup__container popup__container_edit">
+        <form action="#" name="profile-form" class="form popup__container popup__container_edit" novalidate>
           <button type="button" aria-label="close" class="popup__close popup__close_edit"></button>
           <h2 class="popup__title popup__title_edit">Редактировать профиль</h2>
-          <input type="text" name="name" class="popup__input popup__input_edit_name">
-          <input type="text" name="job" class="popup__input popup__input_edit_job">
+          <input type="text" name="name" minlength="2" maxlength="40" required class="popup__input popup__input_edit_name">
+          <input type="text" name="job" minlength="2" maxlength="200" required class="popup__input popup__input_edit_job">
           <button type="submit" class="popup__save popup__save_edit">Сохранить</button>
         </form>
       </div>
@@ -48,11 +48,11 @@
 
     <section class="popup popup_add">
       <div class="popup__container">
-        <form action="#" name="add-form" class="popup__container popup__container_add">
+        <form action="#" name="add-form" class="form popup__container popup__container_add" novalidate>
           <button type="button" aria-label="close" class="popup__close popup__close_add"></button>
           <h2 class="popup__title popup__title_add">Новое место</h2>
-          <input type="text" name="place" placeholder="Название" class="popup__input popup__input_add-title">
-          <input type="text" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_add-link">
+          <input type="text" name="place" minlength="2" maxlength="30" required placeholder="Название" class="popup__input popup__input_add-title">
+          <input type="url" name="link" placeholder="Ссылка на картинку" required class="popup__input popup__input_add-link">
           <button type="submit" class="popup__save popup__save_add">Сохранить</button>
         </form>
       </div>
@@ -85,6 +85,9 @@
   </template>
 
   <script src="./scripts/index.js" defer></script>
+  <script src="./scripts/validate.js" defer></script>
 </body>
 </html>
 
+<!-- novalidate в формах - я отключил браузерную валидацию, строки 39 и 51 -->
+<!-- разобраться с зум картинкой - принимает ширину попап контейнера в 430 px -->
