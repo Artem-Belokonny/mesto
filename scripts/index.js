@@ -25,8 +25,6 @@ const initialCards = [
     },
 ];
 
-// const popup = document.querySelector('.popup');
-const popupOpened = document.querySelector('.popup_opened');
 const popupEdit = document.querySelector('.popup_edit');
 const popupEditOpenButton = document.querySelector('.profile__edit-button');
 const popupEditCloseButton = document.querySelector('.popup__close_edit');
@@ -47,7 +45,7 @@ const popupZoom = document.querySelector('.popup_zoom');
 const popupZoomCloseButton = document.querySelector('.popup__close_zoom');
 const page = document.querySelector('.page');
 
-// пробую закрытие по CLICK - почему закрывает только 1ое EDIT?
+// закрытие по CLICK - делегирование на page
 
 function closePopupByClick(evt) {
     if (evt.target.classList.contains('popup_opened')) {
@@ -55,8 +53,13 @@ function closePopupByClick(evt) {
     }
 }
 
-page.addEventListener('click', closePopupByClick);
-// 
+// закрытие через ESCAPE
+function closePopupByEsc(evt) {
+    const popupOpened = document.querySelector('.popup_opened');
+    if (evt.key === "Escape" && popupOpened) {
+    closePopup(popupOpened);
+    }
+}
 
 function takeProfileDateValue() {
     popupName.value = profileName.textContent;
@@ -69,12 +72,13 @@ function saveFormData() {
 }
 
 function openPopup(popup) {
-    popup.classList.toggle('popup_opened');
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupByEsc);
 }
 
-function closePopup(popup, evt) {
-    evt.preventDefault();
-    popup.classList.toggle('popup_opened');
+function closePopup(popup) {
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', closePopupByEsc);
 }
 
 function formSubmitHandler (evt) {
@@ -143,7 +147,8 @@ popupEditOpenButton.addEventListener('click', () => {
     takeProfileDateValue();
     openPopup(popupEdit);
 });
-popupEditCloseButton.addEventListener('click', (evt) => closePopup(popupEdit, evt));
+popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
 popupAddOpenButton.addEventListener('click', () => openPopup(popupAdd));
-popupAddCloseButton.addEventListener('click', (evt) => closePopup(popupAdd, evt));
-popupZoomCloseButton.addEventListener('click', (evt) => closePopup(popupZoom, evt));
+popupAddCloseButton.addEventListener('click', () => closePopup(popupAdd));
+popupZoomCloseButton.addEventListener('click', () => closePopup(popupZoom));
+page.addEventListener('click', closePopupByClick);

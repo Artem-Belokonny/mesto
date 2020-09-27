@@ -8,6 +8,7 @@
     line-height: 17px;
     border: none;
     border-bottom: 1px solid #545454;
+    position: relative;
 }
 
 @media only screen and (max-width: 515px) {
