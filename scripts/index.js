@@ -125,6 +125,7 @@ popupEditOpenButton.addEventListener('click', () => {
 });
 popupEditCloseButton.addEventListener('click', () => closePopup(popupEdit));
 popupAddOpenButton.addEventListener('click', () => {
+    popupAddButton.classList.add('popup__save_disabled');
     popupAddButton.setAttribute('disabled', true);
     addFormPlaceInput.value = "";
     addFormLinkInput.value = "";
