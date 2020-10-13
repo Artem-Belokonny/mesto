@@ -81,7 +81,7 @@ function closePopupByOverlayClick(evt) {
 // закрытие через ESCAPE
 function closePopupByEsc(evt) {
     const popupOpened = document.querySelector('.popup_opened');
-    if (evt.key === "Escape" && popupOpened) {
+    if (evt.key === "Escape") {
     closePopup(popupOpened);
     }
 }
@@ -96,14 +96,14 @@ function saveFormData() {
     profileJob.textContent = popupJob.value;
 }
 
-function openPopup(popup) {
+export function openPopup(popup) {
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', closePopupByEsc);
+    document.addEventListener('keyup', closePopupByEsc);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', closePopupByEsc);
+    document.removeEventListener('keyup', closePopupByEsc);
 }
 
 function formSubmitHandler (evt) {

@@ -1,3 +1,5 @@
+import {openPopup} from './index.js'
+
 class Card {
     constructor({name, link}, selector) {
         this._link = link;
@@ -12,18 +14,6 @@ class Card {
         .querySelector('.elements__card')
         .cloneNode(true);
         return cardElement;
-    }
-
-    _openPopup(popup) {
-        popup.classList.add('popup_opened');
-        document.addEventListener('keydown', this._closePopupByEsc);
-    }
-
-    _closePopupByEsc(evt) {
-        const popupOpened = document.querySelector('.popup_opened');
-        if (evt.key === "Escape" && popupOpened) {
-            popupOpened.classList.remove('popup_opened');
-        }
     }
 
     _deleteHandler() {
@@ -41,7 +31,7 @@ class Card {
         popupZoomTitle.textContent = this._element.querySelector('.elements__image').alt;
         popupZoomImage.alt = this._element.querySelector('.elements__image').alt;;
         popupZoomImage.src = this._element.querySelector('.elements__image').src;;
-        this._openPopup(popupZoom);
+        openPopup(popupZoom);
     }
 
     _setEventListeners() {
@@ -52,9 +42,11 @@ class Card {
 
     getElement() {
         this._element = this._getTemplate();
-        this._element.querySelector('.elements__title').textContent = this._name;
-        this._element.querySelector('.elements__image').alt = this._name;
-        this._element.querySelector('.elements__image').src = this._link;
+        const elementsTitle = this._element.querySelector('.elements__title');
+        const elementsImage = this._element.querySelector('.elements__image');
+        elementsTitle.innerText = this._name;
+        elementsImage.alt = this._name;
+        elementsImage.src = this._link;
         this._setEventListeners();
         return this._element;
     }
