@@ -53,3 +53,10 @@ class Card {
 }
 
 export default Card;
+
+// this._renderedItems.forEach((item) => {
+//     const card = new Card (item, template);
+//     const cardElement = card.getElement();
+
+//     this.setItem(cardElement);
+//     });

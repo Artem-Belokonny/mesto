@@ -1,4 +1,5 @@
 import Card from './Card.js';
+import Section from './Section.js';
 import {config, FormValidator} from './FormValidator.js'
 
 const initialCards = [
@@ -40,7 +41,7 @@ const popupAdd = document.querySelector('.popup_add');
 const popupAddOpenButton = document.querySelector('.profile__add-button');
 const popupAddCloseButton = document.querySelector('.popup__close_add');
 const template = document.querySelector('.elements-template').content;
-const cards = document.querySelector('.elements');
+const cardListSection = document.querySelector('.elements');
 const addFormPlaceInput = document.querySelector('.popup__input_add-title');
 const addFormLinkInput = document.querySelector('.popup__input_add-link');
 const popupZoom = document.querySelector('.popup_zoom');
@@ -49,13 +50,17 @@ const popupAddButton = document.querySelector('.popup__save_add');
 const formAddInputTitle = document.querySelector('.popup__input_add-title');
 const formAddInputLink = document.querySelector('.popup__input_add-link');
 
+const cardList = new Section ({items: initialCards,
+renderer: (item) => {
+    const card = new Card (item, template);
+    const cardElement = card.getElement();
+    cardList.setItem(cardElement);
+        },
+    },
+    cardListSection
+);
 
-
-initialCards.forEach(({name, link}) => {
-    const card = new Card ({name, link}, template);
-    const element = card.getElement();
-    cards.append(element);
-})
+cardList.renderItems();
 
 const addCard = (evt) => {
     evt.preventDefault();
@@ -65,7 +70,7 @@ const addCard = (evt) => {
     }
     const card = new Card(cardData, template);
     const element = card.getElement();
-    cards.prepend(element);
+    cardListSection.prepend(element);
     closePopup(popupAdd, evt);
 }
 
