@@ -1,10 +1,9 @@
-import {openPopup} from './index.js'
-
-class Card {
-    constructor({name, link}, selector) {
+export default class Card {
+    constructor({name, link}, selector, openImagePopup) {
         this._link = link;
         this._name = name;
         this._selector = selector;
+        this._openImagePopup = openImagePopup;
     }
 
     _getTemplate() {
@@ -25,13 +24,10 @@ class Card {
     }
 
     _zoomPopup() {
-        const popupZoom = document.querySelector('.popup_zoom');
-        const popupZoomTitle = document.querySelector('.popup__title_zoom');
-        const popupZoomImage = document.querySelector('.popup__image');
-        popupZoomTitle.textContent = this._element.querySelector('.elements__image').alt;
-        popupZoomImage.alt = this._element.querySelector('.elements__image').alt;;
-        popupZoomImage.src = this._element.querySelector('.elements__image').src;;
-        openPopup(popupZoom);
+        this._openImagePopup(
+            this._name,
+            this._link,
+        )
     }
 
     _setEventListeners() {
@@ -51,5 +47,3 @@ class Card {
         return this._element;
     }
 }
-
-export default Card;
