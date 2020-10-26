@@ -73,10 +73,6 @@ _setEventListeners () {
 }
 
 enableValidation = () => {
-    const submitFormHandler = (evt) => {
-        evt.preventDefault();
-    }
-    this._formElement.addEventListener('submit', submitFormHandler);
     this._setEventListeners();
 }
 }

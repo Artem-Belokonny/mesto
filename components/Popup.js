@@ -1,32 +1,28 @@
 export default class Popup {
     constructor(popupSelector) {
         this._popupSelector = popupSelector;
+        this._handleEscClose = this._handleEscClose.bind(this);
     }
 
-    open () {
+    open() {
         this._popupSelector.classList.add('popup_opened');
-        document.addEventListener('keyup', () => this._handleEscClose());
+        document.addEventListener('keyup', (event) => this._handleEscClose(event));
     }
 
-    close () {
+    close() {
         this._popupSelector.classList.remove('popup_opened');
-        document.removeEventListener('keyup', () => this._handleEscClose());
+        document.removeEventListener('keyup', (event) => this._handleEscClose(event));
     }
 
-    _handleEscClose (evt) {
+    _handleEscClose(evt) {
         const popupOpened = document.querySelector('.popup_opened');
         if (evt.key === "Escape") {
         this.close(popupOpened);
         }
     }
 
-    setEventListeners () {
+    setEventListeners() {
         this._popupSelector.querySelector('.popup__close').addEventListener('click', this.close.bind(this));
-    }
-}
-
-export default class PopupWithImage extends Popup {
-    constructor(openImagePopup) {
-        this._openImagePopup = openImagePopup;
+        document.addEventListener('keyup', this._handleEscClose);
     }
 }
