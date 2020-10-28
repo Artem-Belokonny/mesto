@@ -6,7 +6,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import {config, FormValidator} from '../components/FormValidator.js';
 import {openImagePopup} from '../utils/utils.js';
-import {initialCards, cardListSection, template, popupEdit, popupAddOpenButton, popupAdd, popupZoom, popupAddButton, popupEditOpenButton, profileName, profileJob, formAddInputTitle, formAddInputLink} from '../utils/constants.js';
+import {initialCards, cardListSection, template, popupEdit, popupEditButton, popupAddOpenButton, popupAdd, popupZoom, popupAddButton, popupEditOpenButton, profileName, profileJob, formAddInputTitle, formAddInputLink} from '../utils/constants.js';
+import Popup from '../components/Popup';
 
 // отрисовка массива карточек
 const cardsList = new Section ({items: initialCards,
@@ -57,13 +58,6 @@ editPopupForm.setEventListeners();
 export const zoomImagePopup = new PopupWithImage(popupZoom);
 zoomImagePopup.setEventListeners();
 
-// закрытие popup по клику на overlay
-function closePopupByOverlayClick(evt) {
-    const popupOpened = document.querySelector('.popup_opened');
-    if (evt.target.classList.contains('popup_opened')) {
-        evt.target.classList.remove('popup_opened');
-    }
-}
 
 // экземпляр класса данных user`а
 const user = new UserInfo({
@@ -83,13 +77,12 @@ formAddValidator.enableValidation()
 popupEditOpenButton.addEventListener('click', () => {
     user.getUserInfo();
     editPopupForm.open(popupEdit);
+    formEditValidator.hideFormErrors();
 });
 popupAddOpenButton.addEventListener('click', () => {
     popupAddButton.classList.add('popup__save_disabled');
-    popupAddButton.setAttribute('disabled', true);
+    popupAddButton.setAttribute('disabled', 'disabled');
     addPopupForm.open(popupAdd);
+    formAddValidator.hideFormErrors();
 });
 popupAddButton.addEventListener('click', addCard);
-popupEdit.addEventListener('mousedown', closePopupByOverlayClick);
-popupAdd.addEventListener('mousedown', closePopupByOverlayClick);
-popupZoom.addEventListener('mousedown', closePopupByOverlayClick);

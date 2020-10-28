@@ -32,6 +32,13 @@ _hideInputError (inputElement) {
     errorElement.classList.remove(this._errorClass);
 }
 
+hideFormErrors() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    inputList.forEach((inputElement) => {
+        this._hideInputError (inputElement);
+    });
+}
+
 _getErrorMesage(inputElement) {
     return inputElement.validationMessage;
 }

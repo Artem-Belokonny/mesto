@@ -38,5 +38,6 @@ export const cardListSection = document.querySelector('.elements');
 export const popupZoom = document.querySelector('.popup_zoom');
 export const popupZoomCloseButton = document.querySelector('.popup__close_zoom');
 export const popupAddButton = document.querySelector('.popup__save_add');
+export const popupEditButton = document.querySelector('.popup__save_edit');
 export const formAddInputTitle = document.querySelector('.popup__input_add-title');
 export const formAddInputLink = document.querySelector('.popup__input_add-link');

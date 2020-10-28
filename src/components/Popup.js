@@ -17,12 +17,20 @@ export default class Popup {
     _handleEscClose(evt) {
         const popupOpened = document.querySelector('.popup_opened');
         if (evt.key === "Escape") {
-        this.close(popupOpened);
+            this.close(popupOpened);
+        }
+    }
+
+    _closePopupByOverlayClick(evt) {
+        const popupOpened = document.querySelector('.popup_opened');
+        if (evt.target === evt.currentTarget) {
+            this.close(popupOpened);
         }
     }
 
     setEventListeners() {
         this._popupSelector.querySelector('.popup__close').addEventListener('click', this.close.bind(this));
         document.addEventListener('keyup', this._handleEscClose);
+        this._popupSelector.addEventListener('mousedown', this._closePopupByOverlayClick.bind(this));
     }
 }
