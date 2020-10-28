@@ -72,7 +72,7 @@ _setEventListeners () {
     this._toggleButtonState(inputList, buttonElement);
 }
 
-enableValidation = () => {
+enableValidation() {
     this._setEventListeners();
 }
 }
