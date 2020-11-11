@@ -1,18 +1,20 @@
 export default class UserInfo {
-    constructor({userName, userJob}) {
+    constructor({userName, userAbout, userAvatar}) {
         this._userName = userName;
-        this._userJob = userJob;
+        this._userAbout = userAbout;
+        this._userAvatar = userAvatar;
         this._popupName = document.querySelector('.popup__input_edit_name');
-        this._popupJob = document.querySelector('.popup__input_edit_job')
+        this._popupAbout = document.querySelector('.popup__input_edit_about');
     }
 
     getUserInfo () {
         this._popupName.value = this._userName.textContent;
-        this._popupJob.value = this._userJob.textContent;
+        this._popupAbout.value = this._userAbout.textContent;
     }
 
-    setUserInfo () {
-        this._userName.textContent = this._popupName.value;
-        this._userJob.textContent = this._popupJob.value;
+    setUserInfo (result) {
+        this._userName.textContent = result.name;
+        this._userAbout.textContent = result.about;
+        this._userAvatar.src = result.avatar;
     }
 }

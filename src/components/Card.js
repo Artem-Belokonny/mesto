@@ -1,9 +1,10 @@
 export default class Card {
-    constructor({name, link}, selector, openImagePopup) {
+    constructor({name, link}, selector, openImagePopup, openDeleteCardPopup) {
         this._link = link;
         this._name = name;
         this._selector = selector;
         this._openImagePopup = openImagePopup;
+        this._openDeleteCardPopup = openDeleteCardPopup;
     }
 
     _getTemplate() {
@@ -30,10 +31,15 @@ export default class Card {
         )
     }
 
+    _openDeletePopup() {
+        this._openDeleteCardPopup()
+    }
+
     _setEventListeners() {
-        this._element.querySelector('.elements__delete-button').addEventListener('click', () => this._deleteHandler());
+        // this._element.querySelector('.elements__delete-button').addEventListener('click', () => this._deleteHandler());
         this._element.querySelector('.elements__like').addEventListener('click', () => this._toggleLike());
         this._element.querySelector('.elements__image').addEventListener('click', () => this._zoomPopup());
+        this._element.querySelector('.elements__delete-button').addEventListener('click', () => this._openDeletePopup());
     }
 
     getElement() {

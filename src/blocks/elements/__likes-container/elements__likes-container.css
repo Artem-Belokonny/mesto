@@ -1,0 +1,6 @@
+.elements__likes-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 24px;
+    text-align: center;
+}

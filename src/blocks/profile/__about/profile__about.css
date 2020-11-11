@@ -1,4 +1,4 @@
-.profile__job {
+.profile__about {
     max-width: 400px;
     font-style: normal;
     font-weight: normal;
@@ -11,7 +11,7 @@
 }
 
 @media only screen and (max-width: 660px) {
-    .profile__job {
+    .profile__about {
     font-size: 14px;
     line-height: 17px;
     text-align: center;

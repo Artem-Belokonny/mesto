@@ -7,6 +7,7 @@ export const config = {
     errorClass: 'popup__input-error_active',
     formEditSelector: '.popup__container_edit',
     formAddSelector: '.popup__container_add',
+    formEditAvatarSelector: '.popup__container_editAvatar',
 }
 
 export class FormValidator {
