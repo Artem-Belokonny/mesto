@@ -88,7 +88,7 @@ popupEditAvatarValidator.enableValidation()
 export const deleteCardPopup = new PopupDeleteConfirm({
   popupSelector: popupDelete,
   onSubmit: (card) => {
-    const id = card.getId();
+    const id = card.getCardId();
     api.deleteCard(id)
       .then(() => {
         card.deleteHandler();

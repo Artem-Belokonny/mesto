@@ -62,11 +62,9 @@
         <form action="#" name="add-form" class="popup__form popup__container popup__container_add" novalidate>
           <button type="button" aria-label="close" class="popup__close popup__close_add"></button>
           <h2 class="popup__title popup__title_add">Новое место</h2>
-          <input type="text" name="name" minlength="2" maxlength="30" required placeholder="Название"
-            class="popup__input popup__input_add-title" id="add-title">
+          <input type="text" name="name" minlength="2" maxlength="30" required placeholder="Название" class="popup__input popup__input_add-title" id="add-title">
           <span class="popup__input-error" id="add-title-error"></span>
-          <input type="url" name="link" placeholder="Ссылка на картинку" required
-            class="popup__input popup__input_add-link" id="add-link">
+          <input type="url" name="link" placeholder="Ссылка на картинку" required class="popup__input popup__input_add-link" id="add-link">
           <span class="popup__input-error" id="add-link-error"></span>
           <button type="submit" class="popup__save popup__save_add">Сохранить</button>
         </form>
@@ -80,33 +78,34 @@
         <p class="popup__title_zoom"></p>
       </div>
     </section>
+
+    <section class="popup popup_delete">
+      <div class="popup__container">
+        <form action="#" name="delete-form" class="popup__form popup__container popup__container_delete">
+          <button type="button" aria-label="close" class="popup__close popup__close_delete"></button>
+          <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
+          <button type="submit" class="popup__save popup__save_delete">Да</button>
+        </form>
+      </div>
+    </section>
+  
+    <section class="popup popup_editAvatar">
+      <div class="popup__container">
+        <form action="#" name="editAvatar-form" class="popup__form popup__container popup__container_editAvatar"
+          novalidate>
+          <button type="button" aria-label="close" class="popup__close popup__close_editAvatar"></button>
+          <h2 class="popup__title popup__title_editAvatar">Обновить аватар</h2>
+          <input type="url" name="link" placeholder="Ссылка на новый аватар" required
+            class="popup__input popup__input_editAvatar-link" id="editAvatar-link">
+          <span class="popup__input-error" id="editAvatar-link-error"></span>
+          <button type="submit" class="popup__save popup__save_editAvatar">Сохранить</button>
+        </form>
+      </div>
+    </section>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-
-  <section class="popup popup_delete">
-    <div class="popup__container">
-      <button type="button" aria-label="close" class="popup__close popup__close_delete"></button>
-      <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
-      <button type="submit" class="popup__save popup__save_delete">Да</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="popup popup_editAvatar">
-    <div class="popup__container">
-      <form action="#" name="editAvatar-form" class="popup__form popup__container popup__container_editAvatar"
-        novalidate>
-        <button type="button" aria-label="close" class="popup__close popup__close_editAvatar"></button>
-        <h2 class="popup__title popup__title_editAvatar">Обновить аватар</h2>
-        <input type="url" name="link" placeholder="Ссылка на новый аватар" required
-          class="popup__input popup__input_editAvatar-link" id="editAvatar-link">
-        <span class="popup__input-error" id="editAvatar-link-error"></span>
-        <button type="submit" class="popup__save popup__save_editAvatar">Сохранить</button>
-      </form>
-    </div>
-  </section>
 
   <template class="elements-template">
     <article class="elements__card">

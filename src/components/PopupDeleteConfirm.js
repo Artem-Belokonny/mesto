@@ -5,11 +5,7 @@ export default class PopupDeleteConfirm extends Popup {
     super(popupSelector);
     this._onSubmit = onSubmit;
   }
-  //Сохраняем карточку из параметров в свойство
-  open(card) {
-    this._card = card;
-    super.open();
-  }
+
   //Про сабмите передаем в колбек карточку которую сохранили в open
   _handleSubmit() {
     this._onSubmit(this._card);
@@ -17,9 +13,15 @@ export default class PopupDeleteConfirm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupSelector.querySelector('.popup__save_delete').addEventListener('submit', (evt) => {
+    this._popupSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._handleSubmit();
     })
   }
+
+    //Сохраняем карточку из параметров в свойство
+    open(card) {
+      this._card = card;
+      super.open();
+    }
 }

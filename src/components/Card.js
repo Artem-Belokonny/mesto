@@ -39,7 +39,7 @@ export default class Card {
     }
 
     _openDeletePopup() {
-        this._handleDeleteCard()
+        this._handleDeleteCard(this)
     }
 
     _setEventListeners() {
@@ -52,17 +52,17 @@ export default class Card {
         return this._cardId;
     }
 
-    likeIsActive() {
-        if (this._element.querySelector('.elements__like').classList.contains('elements__like_active')) {
-            return true
-        }
-        return false
-    }
+    // likeIsActive() {
+    //     if (this._element.querySelector('.elements__like').classList.contains('elements__like_active')) {
+    //         return true
+    //     }
+    //     return false
+    // }
 
-    changeLike(allLikes) {
-        this._toggleLike()
-        this._element.querySelector('.elements__likes-count').textContent = allLikes;
-    }
+    // changeLike(allLikes) {
+    //     this._toggleLike()
+    //     this._element.querySelector('.elements__likes-count').textContent = allLikes;
+    // }
 
     getElement() {
         this._element = this._getTemplate();
