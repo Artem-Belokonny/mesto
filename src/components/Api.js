@@ -31,18 +31,18 @@ export default class Api {
         about: userData.about
       })
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`Ошибка: ${res.status}`)
-    })
-    .then((result) => {
-      return result;
-    })
-    .catch(err => {
-      alert(err)
-    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .then((result) => {
+        return result;
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
   patchUserAvatar(userAvatar) {
@@ -53,20 +53,19 @@ export default class Api {
         avatar: userAvatar.link,
       })
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`Ошибка: ${res.status}`)
-    })
-    .then((result) => {
-      return result;
-    })
-    .catch(err => {
-      alert(err)
-    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .then((result) => {
+        return result;
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
-
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
@@ -95,18 +94,74 @@ export default class Api {
         link: cardData.link
       })
     })
-    .then((res) => {
-      if (res.ok) {
-        return res.json()
-      }
-      return Promise.reject(`Ошибка: ${res.status}`)
-    })
-    .then((data) => {
-      return data;
-    })
-    .catch(err => {
-      alert(err)
-    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch(err => {
+        alert(err)
+      })
   }
 
+  deleteCard() {
+    return fetch(`${this.baseUrl}/cards/${_id}`, {
+      method: "DELETE",
+      headers: this.headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  putLike() {
+    return fetch(`${this.baseUrl}/cards/likes/${_id}`, {
+      method: "PUT",
+      headers: this.headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
+
+  deleteLike() {
+    return fetch(`${this.baseUrl}/cards/likes/${_id}`, {
+      method: "DELETE",
+      headers: this.headers
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+        }
+        return Promise.reject(`Ошибка: ${res.status}`)
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch(err => {
+        alert(err)
+      })
+  }
 }

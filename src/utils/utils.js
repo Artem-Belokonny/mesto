@@ -1,4 +1,5 @@
-import { zoomImagePopup, deleteCardPopup } from '../pages/index.js';
+import Card from '../components/Card.js';
+import { zoomImagePopup, deleteCardPopup, cardsList } from '../pages/index.js';
 
 export const openImagePopup = (name, link) => {
   const popupZoom = document.querySelector('.popup_zoom');
@@ -10,16 +11,22 @@ export const openImagePopup = (name, link) => {
   zoomImagePopup.open(popupZoom);
 }
 
-export const openDeleteCardPopup = () => {
-  const popupDelete = document.querySelector('.popup_delete');
-  deleteCardPopup.open(popupDelete);
+export const createCards = (cardData, selector, openImagePopup) => {
+  const card = new Card(cardData, selector, openImagePopup, {
+    handleDeleteCard: (card) => {
+      deleteCardPopup.open(card)
+    }
+  })
+  const cardElement = card.getElement();
+  cardsList.appendCard(cardElement)
 }
 
-// export const renderLoading = (isLoading) => {
-//   const saveButton = document.querySelector('.popup__save');
-//   if (isLoading) {
-//     saveButton.textContent = "Сохранение...";
-//   } else {
-//     saveButton.textContent = "Сохранить";
-//   }
-// }
+export const addCard = (cardData, selector, openImagePopup) => {
+  const card = new Card(cardData, selector, openImagePopup, {
+    handleDeleteCard: (card) => {
+      deleteCardPopup.open(card)
+    }
+  })
+  const cardElement = card.getElement();
+  cardsList.prependCard(cardElement)
+}

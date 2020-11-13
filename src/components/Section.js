@@ -8,7 +8,6 @@ export default class Section {
         res.forEach(item => {
             this._renderer(item)
         })
-        
     }
     
     appendCard(element) {

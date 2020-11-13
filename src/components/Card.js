@@ -1,10 +1,16 @@
 export default class Card {
-    constructor({name, link}, selector, openImagePopup, openDeleteCardPopup) {
-        this._link = link;
-        this._name = name;
+    constructor(cardData, selector, openImagePopup, { handleDeleteCard, handleCardLikes }) {
+        this._link = cardData.link;
+        this._name = cardData.name;
+        this._cardId = cardData._id;
+        this._owner = cardData.owner;
+        this._ownerId = cardData.owner._id;
+        this._likes = cardData.likes;
+        this._likesCount = cardData.likes.length;
         this._selector = selector;
         this._openImagePopup = openImagePopup;
-        this._openDeleteCardPopup = openDeleteCardPopup;
+        this._handleDeleteCard = handleDeleteCard;
+        this._handleCardLikes = handleCardLikes;
     }
 
     _getTemplate() {
@@ -16,7 +22,7 @@ export default class Card {
         return cardElement;
     }
 
-    _deleteHandler() {
+    deleteHandler() {
         this._element.remove();
     }
 
@@ -32,14 +38,17 @@ export default class Card {
     }
 
     _openDeletePopup() {
-        this._openDeleteCardPopup()
+        this._handleDeleteCard()
     }
 
     _setEventListeners() {
-        // this._element.querySelector('.elements__delete-button').addEventListener('click', () => this._deleteHandler());
         this._element.querySelector('.elements__like').addEventListener('click', () => this._toggleLike());
         this._element.querySelector('.elements__image').addEventListener('click', () => this._zoomPopup());
         this._element.querySelector('.elements__delete-button').addEventListener('click', () => this._openDeletePopup());
+    }
+
+    getId() {
+        return this._cardId;
     }
 
     getElement() {
@@ -49,6 +58,10 @@ export default class Card {
         elementsTitle.innerText = this._name;
         elementsImage.alt = this._name;
         elementsImage.src = this._link;
+        // if (!this._ownerId) {
+        //     const deleteButton = this._element.querySelector('.elements__delete-button');
+        //     deleteButton.style.display = "none";
+        // }
         this._setEventListeners();
         return this._element;
     }

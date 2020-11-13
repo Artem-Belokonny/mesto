@@ -5,25 +5,23 @@ import Section from '../components/Section.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupDeleteConfirm from '../components/PopupDeleteConfirm.js';
 import { config, FormValidator } from '../components/FormValidator.js';
-import { openImagePopup, openDeleteCardPopup } from '../utils/utils.js';
+import { openImagePopup, createCards, addCard } from '../utils/utils.js';
 import { profileAvatar, popupEditAvatarButton, popupDelete, popupEditAvatar, popupAvatarEditOpenButton, cardListSection, template, popupEdit, popupAddOpenButton, popupAdd, popupZoom, popupAddButton, popupEditOpenButton, profileName, profileAbout } from '../utils/constants.js';
-import Popup from '../components/Popup';
 
-const cardsList = new Section ({
-  renderer: (item) => {
-    const card = new Card(item, template, openImagePopup, openDeleteCardPopup);
-    const cardElement = card.getElement();
-    cardsList.appendCard(cardElement)
-  } 
+export const cardsList = new Section({
+  renderer: (cardData) => {
+    createCards(cardData, template, openImagePopup);
+  }
 }, cardListSection)
 
 // экземпляр класса Api
 export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-17',
   headers: {
-      authorization: 'f8a9e527-6ca4-4e1d-b3eb-bf388e887896',
-      'Content-Type': 'application/json'
+    authorization: 'f8a9e527-6ca4-4e1d-b3eb-bf388e887896',
+    'Content-Type': 'application/json'
   }
 });
 
@@ -31,16 +29,10 @@ export const api = new Api({
 const addPopupForm = new PopupWithForm({
   popupSelector: popupAdd,
   handleFormSubmit: (cardData) => {
-    addPopupForm.changeButtonText();
     api.postNewCard(cardData)
-    .then((res) => {
-      const card = new Card (res, template, openImagePopup, openDeleteCardPopup);
-      const cardElement = card.getElement();
-      cardsList.prependCard(cardElement);
-    })
-    .finally(() => {
-      addPopupForm.changeBackButtonText();
-    })
+      .then((res) => {
+        addCard(res, template, openImagePopup);
+      })
   }
 })
 addPopupForm.setEventListeners();
@@ -49,14 +41,10 @@ addPopupForm.setEventListeners();
 const editPopupForm = new PopupWithForm({
   popupSelector: popupEdit,
   handleFormSubmit: (userData) => {
-    editPopupForm.changeButtonText();
     api.patchUserData(userData)
-    .then((res) => {
-      user.setUserInfo(res);
-    })
-    .finally(() => {
-      editPopupForm.changeBackButtonText();
-    })
+      .then((res) => {
+        user.setUserInfo(res);
+      })
   }
 })
 editPopupForm.setEventListeners();
@@ -65,14 +53,10 @@ editPopupForm.setEventListeners();
 export const editAvatarPopup = new PopupWithForm({
   popupSelector: popupEditAvatar,
   handleFormSubmit: (userAvatar) => {
-    editAvatarPopup.changeButtonText();
     api.patchUserAvatar(userAvatar)
-    .then((res) => {
-      user.setUserInfo(res);
-    })
-    .finally(() => {
-      editAvatarPopup.changeBackButtonText();
-    })
+      .then((res) => {
+        user.setUserInfo(res);
+      })
   }
 })
 editAvatarPopup.setEventListeners();
@@ -83,9 +67,9 @@ zoomImagePopup.setEventListeners();
 
 // экземпляр класса данных user`а
 const user = new UserInfo({
-    userName: profileName,
-    userAbout: profileAbout,
-    userAvatar: profileAvatar
+  userName: profileName,
+  userAbout: profileAbout,
+  userAvatar: profileAvatar
 })
 
 // валидация формы редактирования профиля
@@ -101,22 +85,27 @@ const popupEditAvatarValidator = new FormValidator(config.formEditAvatarSelector
 popupEditAvatarValidator.enableValidation()
 
 // экземпляр класса попапа удаления карточки
-export const deleteCardPopup = new Popup(popupDelete);
+export const deleteCardPopup = new PopupDeleteConfirm({
+  popupSelector: popupDelete,
+  onSubmit: (card) => {
+    const id = card.getId();
+    api.deleteCard(id)
+      .then(() => {
+        card.deleteHandler();
+        deleteCardPopup.close()
+      })
+  }
+});
 deleteCardPopup.setEventListeners();
 
-// отрисовка массива карточек
-api.getInitialCards()
-.then((res) => {
-  cardsList.renderItems(res);
-})
 
-// получение данных информации профиля с сервера
-api.getUserData()
-  .then((result) => {
-    user.setUserInfo(result);
+Promise.all([api.getInitialCards(), api.getUserData()])
+  .then(([res, userData]) => {
+    cardsList.renderItems(res, userData._id);
+    user.setUserInfo(userData);
   })
 
-  // слушатели
+// слушатели
 popupEditOpenButton.addEventListener('click', () => {
   user.getUserInfo();
   editPopupForm.open(popupEdit);
@@ -136,9 +125,3 @@ popupAvatarEditOpenButton.addEventListener('click', () => {
   popupEditAvatarValidator.enableValidation();
   popupEditAvatarValidator.hideFormErrors();
 })
-
-// разобраться с высотой попапов
-// разобраться со шрифтами новых попапов
-// _id: "8e2bb8f3800c3c6c52ae66f1" - мой айди
-// Как видите, у карточки также есть идентификатор — свойство _id. 
-// Сейчас он вам не нужен, но скоро понадобится.
