@@ -11,8 +11,8 @@ import { openImagePopup, createCards, addCard } from '../utils/utils.js';
 import { profileAvatar, popupEditAvatarButton, popupDelete, popupEditAvatar, popupAvatarEditOpenButton, cardListSection, template, popupEdit, popupAddOpenButton, popupAdd, popupZoom, popupAddButton, popupEditOpenButton, profileName, profileAbout } from '../utils/constants.js';
 
 export const cardsList = new Section({
-  renderer: (cardData) => {
-    createCards(cardData, template, openImagePopup);
+  renderer: (cardData, selfId) => {
+    createCards(cardData, selfId, template, openImagePopup);
   }
 }, cardListSection)
 
@@ -28,10 +28,10 @@ export const api = new Api({
 // экземпляр класса popup формы добавления карточки
 const addPopupForm = new PopupWithForm({
   popupSelector: popupAdd,
-  handleFormSubmit: (cardData) => {
+  handleFormSubmit: (cardData, selfId) => {
     api.postNewCard(cardData)
       .then((res) => {
-        addCard(res, template, openImagePopup);
+        addCard(res, selfId, template, openImagePopup);
       })
   }
 })
