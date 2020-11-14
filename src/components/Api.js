@@ -111,10 +111,7 @@ export default class Api {
   deleteCard(cardData) {
     return fetch(`${this.baseUrl}/cards/${cardData}`, {
       method: "DELETE",
-      headers: this.headers,
-      body: JSON.stringify({
-        _id: cardData._id
-      })
+      headers: this.headers
     })
       .then((res) => {
         if (res.ok) {
@@ -130,7 +127,7 @@ export default class Api {
       })
   }
 
-  putLike() {
+  putLike(_id) {
     return fetch(`${this.baseUrl}/cards/likes/${_id}`, {
       method: "PUT",
       headers: this.headers
@@ -149,7 +146,7 @@ export default class Api {
       })
   }
 
-  deleteLike() {
+  deleteLike(_id) {
     return fetch(`${this.baseUrl}/cards/likes/${_id}`, {
       method: "DELETE",
       headers: this.headers

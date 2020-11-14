@@ -1,5 +1,5 @@
 import Card from '../components/Card.js';
-import { zoomImagePopup, deleteCardPopup, cardsList } from '../pages/index.js';
+import { zoomImagePopup, deleteCardPopup, cardsList, api } from '../pages/index.js';
 
 export const openImagePopup = (name, link) => {
   const popupZoom = document.querySelector('.popup_zoom');
@@ -16,25 +16,17 @@ export const createCards = (cardData, selfId, selector, openImagePopup) => {
     handleDeleteCard: (card) => {
       deleteCardPopup.open(card)
     },
-    handleCardLikes: () => {
-      const id = card.getCardId()
-      if (card.likeIsActive()) {
-        api.deleteLike(id)
-          .then((res) => {
-            card.changeLike(res.likes.length)
-          })
-          .catch((err) => {
-            console.log('Произошла ошибка:', err)
-          })
-      }
-      else {
-        api.putLike(id)
-          .then((res) => {
-            card.changeLike(res.likes.length)
-          })
-          .catch((err) => {
-            console.log('Произошла ошибка:', err)
-          })
+    handleCardLikes: (card) => {
+      if (card.likeClicked()) {
+        api.putLike(cardData._id)
+        .then((res) => {
+          card.changeLike(res.likes.length)
+        })
+      } else {
+        api.deleteLike(cardData._id)
+        .then((res) => {
+          card.changeLike(res.likes.length)
+        })
       }
     }
   })
@@ -47,25 +39,17 @@ export const addCard = (cardData, selfId, selector, openImagePopup) => {
     handleDeleteCard: (card) => {
       deleteCardPopup.open(card)
     },
-    handleCardLikes: () => {
-      const id = card.getCardId()
-      if (card.likeIsActive()) {
-        api.deleteLike(id)
-          .then((res) => {
-            card.changeLike(res.likes.length)
-          })
-          .catch((err) => {
-            console.log('Произошла ошибка:', err)
-          })
-      }
-      else {
-        api.putLike(id)
-          .then((res) => {
-            card.changeLike(res.likes.length)
-          })
-          .catch((err) => {
-            console.log('Произошла ошибка:', err)
-          })
+    handleCardLikes: (card) => {
+      if (card.likeClicked()) {
+        api.putLike(cardData._id)
+        .then((res) => {
+          card.changeLike(res.likes.length)
+        })
+      } else {
+        api.deleteLike(cardData._id)
+        .then((res) => {
+          card.changeLike(res.likes.length)
+        })
       }
     }
   })

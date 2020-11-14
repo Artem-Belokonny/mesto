@@ -32,6 +32,7 @@ const addPopupForm = new PopupWithForm({
     api.postNewCard(cardData)
       .then((res) => {
         addCard(res, selfId, template, openImagePopup);
+        addPopupForm.close()
       })
   }
 })

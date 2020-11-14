@@ -6,7 +6,11 @@ export default class PopupDeleteConfirm extends Popup {
     this._onSubmit = onSubmit;
   }
 
-  //Про сабмите передаем в колбек карточку которую сохранили в open
+  open(card) {
+    this._card = card;
+    super.open();
+  }
+
   _handleSubmit() {
     this._onSubmit(this._card);
   }
@@ -18,10 +22,4 @@ export default class PopupDeleteConfirm extends Popup {
       this._handleSubmit();
     })
   }
-
-    //Сохраняем карточку из параметров в свойство
-    open(card) {
-      this._card = card;
-      super.open();
-    }
 }
