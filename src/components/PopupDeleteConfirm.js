@@ -1,4 +1,4 @@
-import Popup from '../components/Popup.js';
+import Popup from "../components/Popup.js";
 
 export default class PopupDeleteConfirm extends Popup {
   constructor({ popupSelector, onSubmit }) {
@@ -17,9 +17,9 @@ export default class PopupDeleteConfirm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupSelector.addEventListener('submit', (evt) => {
+    this._popupSelector.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleSubmit();
-    })
+    });
   }
 }
